@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raspberry Home</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/jquery.flot.min.js"></script>
+  <script src="static/js/jquery.flot.time.min.js"></script>
+  <script src="static/js/temp_graph.js"></script>
+  <script>
+    {% for temp in data %}
+        plot_graph("{{ temp.sensor_id }}");
+    {% endfor %}
+  </script>
+</head>
+<body>
+  <div id="main">
+    <div id="logo"></div>
+    <div id="content">
+      {% for temp in data %}
+       <div class="temperature" id="{{ temp.sensor_id }}">
+          {{ temp.sensor.name }}
+          <div class="tempFont">{{ temp.temperature|round(1) }} °C</div>
+          <div class=graphContainer id="{{ temp.sensor_id }}_graph"></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
